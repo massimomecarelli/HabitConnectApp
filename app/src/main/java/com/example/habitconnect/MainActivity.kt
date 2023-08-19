@@ -3,12 +3,17 @@ package com.example.habitconnect
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.habitconnect.viewmodel.FragmentTaskViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var bottomNavigationView: BottomNavigationView
-
+    private lateinit var viewModel: FragmentTaskViewModel
+    private lateinit var adapter: TaskAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,9 +46,26 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.Tasks ->{
                     Toast.makeText(this,"tasks", Toast.LENGTH_SHORT).show()
+                    // faccio la transaction per sostituire il fragment nel FrameLayout
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.fragment_container, FragmentTask())
                         .commit()
+                    // ora ho quindi fatto l'inflate del fragment layout nel layout dell'activity, dentro il FrameLayout
+                    // quindi posso chiamare elementi del layout del fragment con findViewById
+                    // in particolare chiamo la recyclerView
+
+                    //inizialmente inizializzo l'adapter con una lista vuota e lo assegno alla recyclerView
+                    adapter = TaskAdapter(listOf())
+                    val recyclerView: RecyclerView = findViewById(R.id.recycle_tasks)
+                    recyclerView.layoutManager = LinearLayoutManager(this)
+                    recyclerView.adapter = adapter
+                    // Poi inizializzo il ViewModel e faccio l'observe dei suoi tasks
+                    // Ogni volta che i tasks nel database cambiano, l'observer sarà notificato e i nuovi task saranno
+                    // aggiunti all'adapter
+                    viewModel = ViewModelProvider(this).get(FragmentTaskViewModel::class.java)
+                    viewModel.tasks.observe(this, { tasks ->
+                        adapter.setTasks(tasks)
+                    })
                     true
                 }
                 R.id.Reminders ->{

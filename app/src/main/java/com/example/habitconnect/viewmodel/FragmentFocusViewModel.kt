@@ -1,4 +1,4 @@
-package com.example.habitconnect
+package com.example.habitconnect.viewmodel
 
 import androidx.lifecycle.ViewModel
 
