@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/Tutorial"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_question_mark"
+        android:title="Tutorial">
+
+    </item>
+    <item android:id="@+id/Focus"
+        android:enabled="true"
+        android:icon="@drawable/icon_selection_focus"
+        android:title="Focus">
+
+    </item>
+    <item android:id="@+id/Tasks"
+        android:enabled="true"
+        android:icon="@drawable/icon_selection_tasks"
+        android:title="Tasks">
+
+    </item>
+    <item android:id="@+id/Reminders"
+        android:enabled="true"
+        android:icon="@drawable/icon_selection_reminders"
+        android:title="Reminders">
+
+    </item>
+    <item android:id="@+id/Community"
+        android:enabled="true"
+        android:icon="@drawable/icon_selection_community"
+        android:title="Community">
+
+    </item>
+</menu>
