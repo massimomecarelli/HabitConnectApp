@@ -8,7 +8,7 @@ import com.example.habitconnect.db.model.Task
 @Dao
 interface TaskDao {
     @Query("select * from task")
-    fun getAllTasks(): LiveData<List<Task>>  //passa una lista di tipo live data
+    fun getAllTasks(): LiveData<List<Task>>
 
     @Query("select * from task where Id=:Id")
     fun getTaskById(Id: Int): Task

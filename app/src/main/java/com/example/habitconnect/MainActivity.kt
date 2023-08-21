@@ -50,22 +50,29 @@ class MainActivity : AppCompatActivity() {
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.fragment_container, FragmentTask())
                         .commit()
+
+
+
                     // ora ho quindi fatto l'inflate del fragment layout nel layout dell'activity, dentro il FrameLayout
                     // quindi posso chiamare elementi del layout del fragment con findViewById
                     // in particolare chiamo la recyclerView
 
-                    //inizialmente inizializzo l'adapter con una lista vuota e lo assegno alla recyclerView
-                    adapter = TaskAdapter(listOf())
+                     //inizialmente inizializzo l'adapter con una lista vuota e lo assegno alla recyclerView
+           /*         adapter = TaskAdapter()
                     val recyclerView: RecyclerView = findViewById(R.id.recycle_tasks)
                     recyclerView.layoutManager = LinearLayoutManager(this)
                     recyclerView.adapter = adapter
-                    // Poi inizializzo il ViewModel e faccio l'observe dei suoi tasks
+
+                    // dichiarazione del ViewModel
+                    viewModel = ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(application))[FragmentTaskViewModel::class.java]
+                    // Faccio l'observe dei tasks del viewmodel
                     // Ogni volta che i tasks nel database cambiano, l'observer sarà notificato e i nuovi task saranno
                     // aggiunti all'adapter
-                    viewModel = ViewModelProvider(this).get(FragmentTaskViewModel::class.java)
-                    viewModel.tasks.observe(this, { tasks ->
+                    viewModel.tasks.observe(this) { tasks ->
                         adapter.setTasks(tasks)
-                    })
+                   }*/
+
+
                     true
                 }
                 R.id.Reminders ->{
