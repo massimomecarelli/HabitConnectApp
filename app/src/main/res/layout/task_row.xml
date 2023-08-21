@@ -12,7 +12,8 @@
         android:layout_margin="4dp"
         app:cardCornerRadius="4dp"
         android:elevation="8dp"
-        android:focusable="true">
+        android:focusable="true"
+        android:clickable="true">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/costraint"
         android:layout_width="match_parent"
@@ -23,7 +24,7 @@
         android:paddingTop="8dp"
         android:paddingEnd="8dp"
         android:paddingBottom="8dp"
-        android:clickable="true">
+        >
 
         <TextView
             android:id="@+id/task_name"

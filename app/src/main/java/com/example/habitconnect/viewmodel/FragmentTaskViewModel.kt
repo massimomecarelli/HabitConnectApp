@@ -73,4 +73,10 @@ class FragmentTaskViewModel (application: Application) : AndroidViewModel(applic
          taskDao.delete(entity)
          getAllTasks()
      }
+
+    fun updateTask(entity: Task){
+        // val taskDao = AppDatabase.getInstance(getApplication()).taskDao()
+        taskDao.update(entity)
+        getAllTasks()
+    }
 }

@@ -7,6 +7,6 @@ import androidx.room.PrimaryKey
 data class Task(
     @PrimaryKey(autoGenerate = true) val Id: Int,  // primary key autoincrementale
     val nome: String,
-    val obiettivo: Int,
-    val completo: Boolean)
+    var obiettivo: Int,
+    var completo: Boolean)
 
