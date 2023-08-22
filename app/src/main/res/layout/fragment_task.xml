@@ -31,6 +31,7 @@
         android:textColor="?attr/colorSecondaryVariant"
         android:backgroundTint="?attr/colorSecondary"
         app:icon="@drawable/ic_baseline_bookmark_add_24"
+        app:iconTint="?attr/colorSecondaryVariant"
         app:layout_constraintBottom_toBottomOf="@+id/recycle_tasks"
         app:layout_constraintEnd_toEndOf="parent" />
 

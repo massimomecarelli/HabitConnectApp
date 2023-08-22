@@ -8,7 +8,7 @@
         <!-- Secondary brand color. -->
         <!-- utilizzati nei fab -->
         <item name="colorSecondary">@color/radical_red</item>
-        <item name="colorSecondaryVariant">@color/material_90</item>
+        <item name="colorSecondaryVariant">@color/material_90</item> <!--usato anche nella bottom nav bar-->
         <item name="colorOnSecondary">@color/white</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>

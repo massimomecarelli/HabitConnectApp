@@ -59,7 +59,8 @@ class FragmentTask() : Fragment() , TaskAdapter.ClickListener{
 
 
         val fab: ExtendedFloatingActionButton = v.findViewById(R.id.floatingActionButton)
-        fab.setOnClickListener { viewModel.insertTask(tt) }
+        fab.setOnClickListener { NewTaskSheet().show(
+            childFragmentManager, "DialogAddTask") }
 
         // ora ho quindi faccio l'inflate del fragment layout nel layout dell'activity, dentro il FrameLayout
         return v

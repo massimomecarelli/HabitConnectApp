@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "task")
 data class Task(
     @PrimaryKey(autoGenerate = true) val Id: Int,  // primary key autoincrementale
-    val nome: String,
+    var nome: String,
     var obiettivo: Int,
     var completo: Boolean)
 
