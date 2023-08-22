@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.RecyclerView
 import com.example.habitconnect.db.model.Task
 import com.example.habitconnect.viewmodel.FragmentTaskViewModel
@@ -33,14 +34,16 @@ class TaskAdapter(private val taskList: List<Task>, val clickListener: ClickList
         var task = taskList[position]
         holder.taskName.text = task.nome
         holder.taskObiettivo.text = task.obiettivo.toString()
+        //di seguito fa il controllo se il task è completo
+        if(task.completo) {
+            holder.itemView.findViewById<ConstraintLayout>(R.id.constraint_row).setBackgroundColor(Color.rgb(40, 200, 10))
+            holder.itemView.findViewById<TextView>(R.id.task_name).setTextColor(Color.WHITE)
+            holder.itemView.findViewById<TextView>(R.id.task_obiettivo).setTextColor(Color.WHITE)
+        }
+        //inserisco un onClickListener
         holder.itemView.setOnClickListener {
+            //esegue la funzione onItemClick che implemento nel FragmentTask
             clickListener.onItemClick(task)
-            if(!task.completo){
-                holder.itemView.findViewById<TextView>(R.id.task_name).setTextColor(Color.GREEN)
-                holder.itemView.findViewById<TextView>(R.id.task_obiettivo).setTextColor(Color.GREEN)
-            } else {holder.itemView.findViewById<TextView>(R.id.task_name).setTextColor(Color.BLACK)
-                holder.itemView.findViewById<TextView>(R.id.task_obiettivo).setTextColor(Color.BLACK)
-            }
         }
     }
 

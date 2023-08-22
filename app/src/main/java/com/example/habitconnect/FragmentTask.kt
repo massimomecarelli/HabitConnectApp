@@ -9,11 +9,13 @@ import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.habitconnect.db.model.Task
 import com.example.habitconnect.viewmodel.FragmentTaskViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.snackbar.Snackbar
 
 
 class FragmentTask() : Fragment() , TaskAdapter.ClickListener{
@@ -23,7 +25,7 @@ class FragmentTask() : Fragment() , TaskAdapter.ClickListener{
 
     private lateinit var recyclerView: RecyclerView
 
-    val tt = Task(0,"prova1",100,false)
+    val tt = Task(0,"prova1",3,false)
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -44,8 +46,6 @@ class FragmentTask() : Fragment() , TaskAdapter.ClickListener{
         // dichiarazione del ViewModel
         viewModel = ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(application))[FragmentTaskViewModel::class.java]
 
-        val t = Task(0,"prova",10,false)
-        viewModel.insertTask(t)
         // Faccio l'observe dei tasks del viewmodel
         // Ogni volta che i tasks nel database cambiano, l'observer sarà notificato e i nuovi task saranno
         // aggiunti all'adapter (si mette ad osservare, setTasks poi invierà una notify)
@@ -64,20 +64,50 @@ class FragmentTask() : Fragment() , TaskAdapter.ClickListener{
         return v
     }
 
+    override fun onItemClick(task: Task) {
+        // decrementa l'obiettivo del task fino a zero
+       if(task.obiettivo>0) {
+            task.obiettivo -= 1
+            if(task.obiettivo==0){
+                task.completo = true
+            }
+        }
+        viewModel.updateTask(task)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val itemTouchHelperCallback = object : ItemTouchHelper.SimpleCallback(
+            ItemTouchHelper.UP or ItemTouchHelper.DOWN,
+            ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
+        ){
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
+                return true
+                TODO("Not implemented")
+            }
 
-        //inizialmente inizializzo l'adapter con una lista vuota e lo assegno alla recyclerView
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val pos = viewHolder.absoluteAdapterPosition
+                val task = adapter.task_list[pos]
 
+                viewModel.deleteTask(task)
 
-    }
-
-    override fun onItemClick(task: Task) {
-        task.obiettivo += 1
-        task.completo = !task.completo
-        viewModel.updateTask(task)
-       // viewModel.deleteTask(task)
+                Snackbar.make(view, "Task deleted", Snackbar.ANIMATION_MODE_SLIDE).apply {
+                    setAction("UNDO"){
+                        viewModel.insertTask(task)
+                    }
+                    show()
+                }
+            }
+        }
+        ItemTouchHelper(itemTouchHelperCallback).apply {
+            attachToRecyclerView(recyclerView)
+        }
     }
 
 }

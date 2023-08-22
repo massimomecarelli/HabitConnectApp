@@ -27,8 +27,7 @@
         android:layout_marginBottom="12dp"
         android:clickable="true"
         android:foregroundGravity="right"
-
-        android:src="@drawable/ic_baseline_add_alarm"
+        android:src="@drawable/ic_baseline_bookmark_add_24"
         app:layout_constraintBottom_toBottomOf="@+id/recycle_tasks"
         app:layout_constraintEnd_toEndOf="parent" />
 

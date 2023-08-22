@@ -13,11 +13,14 @@ interface TaskDao {
     @Query("select * from task where Id=:Id")
     fun getTaskById(Id: Int): Task
 
+    @Query("select * from task where completo=false")
+    fun getNonCompleti(): List<Task>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(vararg task: Task)
 
     @Update
     fun update(task: Task)
     @Delete
-    fun delete(task: Task)
+    suspend fun delete(task: Task)
 }
