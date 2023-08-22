@@ -19,7 +19,7 @@
 
     </androidx.recyclerview.widget.RecyclerView>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/floatingActionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -27,7 +27,10 @@
         android:layout_marginBottom="12dp"
         android:clickable="true"
         android:foregroundGravity="right"
-        android:src="@drawable/ic_baseline_bookmark_add_24"
+        android:text="New task"
+        android:textColor="?attr/colorSecondaryVariant"
+        android:backgroundTint="?attr/colorSecondary"
+        app:icon="@drawable/ic_baseline_bookmark_add_24"
         app:layout_constraintBottom_toBottomOf="@+id/recycle_tasks"
         app:layout_constraintEnd_toEndOf="parent" />
 

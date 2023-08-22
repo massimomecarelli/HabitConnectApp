@@ -36,7 +36,7 @@ class TaskAdapter(private val taskList: List<Task>, val clickListener: ClickList
         holder.taskObiettivo.text = task.obiettivo.toString()
         //di seguito fa il controllo se il task è completo
         if(task.completo) {
-            holder.itemView.findViewById<ConstraintLayout>(R.id.constraint_row).setBackgroundColor(Color.rgb(40, 200, 10))
+            holder.itemView.findViewById<ConstraintLayout>(R.id.constraint_row).setBackgroundColor(Color.rgb(99, 200, 99))
             holder.itemView.findViewById<TextView>(R.id.task_name).setTextColor(Color.WHITE)
             holder.itemView.findViewById<TextView>(R.id.task_obiettivo).setTextColor(Color.WHITE)
         }

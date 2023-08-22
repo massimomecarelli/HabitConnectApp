@@ -5,7 +5,6 @@
         android:enabled="true"
         android:icon="@drawable/ic_baseline_question_mark"
         android:title="Tutorial">
-
     </item>
     <item android:id="@+id/Focus"
         android:enabled="true"

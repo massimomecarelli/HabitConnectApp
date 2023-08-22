@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.habitconnect.db.model.Task
 import com.example.habitconnect.viewmodel.FragmentTaskViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 
 
@@ -57,7 +58,7 @@ class FragmentTask() : Fragment() , TaskAdapter.ClickListener{
 
 
 
-        val fab: FloatingActionButton = v.findViewById(R.id.floatingActionButton)
+        val fab: ExtendedFloatingActionButton = v.findViewById(R.id.floatingActionButton)
         fab.setOnClickListener { viewModel.insertTask(tt) }
 
         // ora ho quindi faccio l'inflate del fragment layout nel layout dell'activity, dentro il FrameLayout
@@ -97,7 +98,7 @@ class FragmentTask() : Fragment() , TaskAdapter.ClickListener{
 
                 viewModel.deleteTask(task)
 
-                Snackbar.make(view, "Task deleted", Snackbar.ANIMATION_MODE_SLIDE).apply {
+                Snackbar.make(view, "Task deleted", Snackbar.LENGTH_LONG).apply {
                     setAction("UNDO"){
                         viewModel.insertTask(task)
                     }
