@@ -38,7 +38,6 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 R.id.Focus ->{
-                    Toast.makeText(this,"focus", Toast.LENGTH_SHORT).show()
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.fragment_container, FragmentFocus())
                         .commit()
@@ -60,7 +59,9 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 R.id.Reminders ->{
-                    Toast.makeText(this,"reminders", Toast.LENGTH_SHORT).show()
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.fragment_container, FragmentReminders())
+                        .commit()
                     true
                 }
                 R.id.Community ->{

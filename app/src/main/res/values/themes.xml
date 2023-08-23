@@ -4,14 +4,18 @@
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/radical_red</item>
         <item name="colorPrimaryVariant">@color/black</item>
+        <item name="colorOnPrimaryFixedVariant">@color/black</item>
         <item name="colorOnPrimary">@color/material_90</item>
         <!-- Secondary brand color. -->
         <!-- utilizzati nei fab -->
         <item name="colorSecondary">@color/radical_red</item>
         <item name="colorSecondaryVariant">@color/material_90</item> <!--usato anche nella bottom nav bar-->
-        <item name="colorOnSecondary">@color/white</item>
+        <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+    </style>
+    <style name="DialogTheme" parent="Theme.MaterialComponents.DayNight.Dialog">
+        <item name="colorAccent">@color/radical_red</item>
     </style>
 </resources>

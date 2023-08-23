@@ -4,8 +4,11 @@ import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
+import androidx.core.view.isInvisible
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.AsyncListDiffer
@@ -39,6 +42,7 @@ class TaskAdapter(private val taskList: List<Task>, val clickListener: ClickList
             holder.itemView.findViewById<ConstraintLayout>(R.id.constraint_row).setBackgroundColor(Color.rgb(99, 200, 99))
             holder.itemView.findViewById<TextView>(R.id.task_name).setTextColor(Color.WHITE)
             holder.itemView.findViewById<TextView>(R.id.task_obiettivo).setTextColor(Color.WHITE)
+            holder.itemView.findViewById<ImageView>(R.id.imageTask).setImageResource(R.drawable.ic_baseline_check_24)
         }
         //inserisco un onClickListener
         holder.itemView.setOnClickListener {

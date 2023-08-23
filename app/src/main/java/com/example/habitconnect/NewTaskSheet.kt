@@ -1,6 +1,5 @@
 package com.example.habitconnect
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -35,7 +34,7 @@ class NewTaskSheet : BottomSheetDialogFragment()
     {
         var newTask = Task(0,"No name",1,false)
 
-        val nome = view.findViewById<TextInputEditText>(R.id.name).text.toString()
+        val nome = view.findViewById<TextInputEditText>(R.id.testo).text.toString()
         if (!nome.isNullOrEmpty()){
             newTask.nome = nome
         }

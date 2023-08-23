@@ -8,16 +8,16 @@ import com.example.habitconnect.db.model.Reminder
 @Dao
 interface ReminderDao {
     @Query("select * from reminder")
-    fun getAllReminders(): List<Reminder>
+    fun getAllReminders(): LiveData<List<Reminder>>
 
     @Query("select * from reminder where Id=:Id")
     fun getReminderById(Id: Int): Reminder
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.ABORT)
     fun insert(vararg task: Reminder)
 
     @Update
     fun update(reminder: Reminder)
     @Delete
-    fun delete(reminder: Reminder)
+    suspend fun delete(reminder: Reminder)
 }

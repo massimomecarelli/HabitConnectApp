@@ -6,5 +6,6 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "reminder")
 data class Reminder(
     @PrimaryKey(autoGenerate = true) val Id: Int,  // primary key autoincrementale
-    val testo: String,
-    val data: Long)
+    var testo: String,
+    var data: String,
+    var time: String)
