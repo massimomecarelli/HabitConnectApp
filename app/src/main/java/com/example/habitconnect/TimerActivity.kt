@@ -42,7 +42,8 @@ class TimerActivity : AppCompatActivity() {
         notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         audioManager = getSystemService(Context.AUDIO_SERVICE) as AudioManager
 
-        // inserisco l'icona e titolo del timer
+        // inserisco icona e titolo del timer
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setIcon(R.drawable.ic_twotone_offline_bolt_24)
         supportActionBar?.title = "      Focus"
 
@@ -104,9 +105,12 @@ class TimerActivity : AppCompatActivity() {
         else
             timerLengthSeconds
 
-        //riprende da dove si era interrotto
-        if (timerState == TimerState.Running)
+        //il timer inizia comunque per evitare problemi con crash cliccando sul menu per la selezione temporale
+        if (timerState != TimerState.Running){
+            PrefUtil.setTimerState(TimerState.Running, this)
+            Log.d("initTimer", "dentro if running")
             startTimer()
+        } else startTimer()
 
         updateButtons()
         updateCountdownUI()
@@ -211,7 +215,102 @@ class TimerActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         // Gestisce il click nell'item dell'action bar
         return when (item.itemId) {
-            R.id.action_settings -> true
+            R.id.Minuto1 -> {
+                    // cancella l'esecuzione attuale come se fosse uno stop
+                    timer.cancel()
+                    onTimerFinished()
+                    // imposta una nuova durata nelle preferences
+                    PrefUtil.setTimerLength(1, this)
+                    // imposta lo stato di Stopped
+                    PrefUtil.setTimerState(TimerState.Stopped, this)
+                    // inizializza un nuovo timer con la nuova durata (che partirà in automatico)
+                    initTimer()
+                    true
+            }
+            R.id.Minuti5 -> {
+                // cancella l'esecuzione attuale come se fosse uno stop
+                timer.cancel()
+                onTimerFinished()
+                // imposta una nuova durata nelle preferences
+                PrefUtil.setTimerLength(5, this)
+                // imposta lo stato di Stopped
+                PrefUtil.setTimerState(TimerState.Stopped, this)
+                // inizializza un nuovo timer con la nuova durata (che partirà in automatico)
+                initTimer()
+                true
+            }
+            R.id.Minuti10 -> {
+                // cancella l'esecuzione attuale come se fosse uno stop
+                timer.cancel()
+                onTimerFinished()
+                // imposta una nuova durata nelle preferences
+                PrefUtil.setTimerLength(10, this)
+                // imposta lo stato di Stopped
+                PrefUtil.setTimerState(TimerState.Stopped, this)
+                // inizializza un nuovo timer con la nuova durata (che partirà in automatico)
+                initTimer()
+                true
+            }
+            R.id.Minuti15 -> {
+                // cancella l'esecuzione attuale come se fosse uno stop
+                timer.cancel()
+                onTimerFinished()
+                // imposta una nuova durata nelle preferences
+                PrefUtil.setTimerLength(15, this)
+                // imposta lo stato di Stopped
+                PrefUtil.setTimerState(TimerState.Stopped, this)
+                // inizializza un nuovo timer con la nuova durata (che partirà in automatico)
+                initTimer()
+                true
+            }
+            R.id.Minuti20 -> {
+                // cancella l'esecuzione attuale come se fosse uno stop
+                timer.cancel()
+                onTimerFinished()
+                // imposta una nuova durata nelle preferences
+                PrefUtil.setTimerLength(20, this)
+                // imposta lo stato di Stopped
+                PrefUtil.setTimerState(TimerState.Stopped, this)
+                // inizializza un nuovo timer con la nuova durata (che partirà in automatico)
+                initTimer()
+                true
+            }
+            R.id.Minuti30 -> {
+                // cancella l'esecuzione attuale come se fosse uno stop
+                timer.cancel()
+                onTimerFinished()
+                // imposta una nuova durata nelle preferences
+                PrefUtil.setTimerLength(30, this)
+                // imposta lo stato di Stopped
+                PrefUtil.setTimerState(TimerState.Stopped, this)
+                // inizializza un nuovo timer con la nuova durata (che partirà in automatico)
+                initTimer()
+                true
+            }
+            R.id.Minuti45 -> {
+                // cancella l'esecuzione attuale come se fosse uno stop
+                timer.cancel()
+                onTimerFinished()
+                // imposta una nuova durata nelle preferences
+                PrefUtil.setTimerLength(45, this)
+                // imposta lo stato di Stopped
+                PrefUtil.setTimerState(TimerState.Stopped, this)
+                // inizializza un nuovo timer con la nuova durata (che partirà in automatico)
+                initTimer()
+                true
+            }
+            R.id.Minuti60 -> {
+                // cancella l'esecuzione attuale come se fosse uno stop
+                timer.cancel()
+                onTimerFinished()
+                // imposta una nuova durata nelle preferences
+                PrefUtil.setTimerLength(60, this)
+                // imposta lo stato di Stopped
+                PrefUtil.setTimerState(TimerState.Stopped, this)
+                // inizializza un nuovo timer con la nuova durata (che partirà in automatico)
+                initTimer()
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }

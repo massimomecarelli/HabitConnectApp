@@ -3,9 +3,51 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".TimerActivity">
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/Minuto1"
         android:orderInCategory="100"
-        android:title="Settings"
-        app:showAsAction="ifRoom"
-        android:icon="@drawable/ic_settings"/>
+        android:name="Settings"
+        app:showAsAction="collapseActionView"
+        android:title="1 minute" />
+    <item
+        android:id="@+id/Minuti5"
+        android:orderInCategory="100"
+        android:name="Settings"
+        app:showAsAction="collapseActionView"
+        android:title="5 minutes" />
+    <item
+        android:id="@+id/Minuti10"
+        android:orderInCategory="100"
+        android:name="Settings"
+        app:showAsAction="collapseActionView"
+        android:title="10 minutes" />
+    <item
+        android:id="@+id/Minuti15"
+        android:orderInCategory="100"
+        android:name="Settings"
+        app:showAsAction="collapseActionView"
+        android:title="15 minutes" />
+    <item
+        android:id="@+id/Minuti20"
+        android:orderInCategory="100"
+        android:name="Settings"
+        app:showAsAction="collapseActionView"
+        android:title="20 minutes" />
+    <item
+        android:id="@+id/Minuti30"
+        android:orderInCategory="100"
+        android:name="Settings"
+        app:showAsAction="collapseActionView"
+        android:title="30 minutes" />
+    <item
+        android:id="@+id/Minuti45"
+        android:orderInCategory="100"
+        android:name="Settings"
+        app:showAsAction="collapseActionView"
+        android:title="45 minutes" />
+    <item
+        android:id="@+id/Minuti60"
+        android:orderInCategory="100"
+        android:name="Settings"
+        app:showAsAction="collapseActionView"
+        android:title="60 minutes" />
 </menu>

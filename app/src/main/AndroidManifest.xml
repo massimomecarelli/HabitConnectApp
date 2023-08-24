@@ -29,7 +29,8 @@
         <activity
             android:name=".TimerActivity"
             android:screenOrientation="portrait"
-            android:exported="true">
+            android:exported="true"
+            android:parentActivityName=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
