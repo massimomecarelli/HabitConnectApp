@@ -1,7 +1,11 @@
 package com.example.habitconnect
 
+import android.app.NotificationManager
+import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
+import android.provider.Settings
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -44,8 +48,20 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 R.id.Focus ->{
-                    val timerActivityIntent = Intent(this, TimerActivity::class.java)
-                    startActivity(timerActivityIntent)
+                    var notificationManager: NotificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+                    /* Dopo SDK è 23 (Marshmallow) è richiesto il permesso esplicito
+                    dell'utente per accedere al do not disturb.
+                    Ma essendo l'SDK sempre >=28 non c'è bisogno di fare un controllo su questa.
+
+                    Verifica quindi se l'utente ha dato conferma
+                     */
+                    if (!notificationManager.isNotificationPolicyAccessGranted) {
+                        // nell'intent metto come destinazione un'app esterna (Settings)
+                        startActivity(Intent(Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS))
+                    } else{
+                        val timerActivityIntent = Intent(this, TimerActivity::class.java)
+                        startActivity(timerActivityIntent)
+                    }
                     true
                 }
                 R.id.Tasks ->{

@@ -52,7 +52,7 @@ class FragmentTask() : Fragment() , TaskAdapter.ClickListener{
         })
 
 
-
+        // fab che apre la dialog per l'aggiunta di un task
         val fab: ExtendedFloatingActionButton = v.findViewById(R.id.floatingActionButton)
         fab.setOnClickListener { NewTaskSheet().show(
             childFragmentManager, "DialogAddTask") }
@@ -61,8 +61,9 @@ class FragmentTask() : Fragment() , TaskAdapter.ClickListener{
         return v
     }
 
+    // click su un item della rv
     override fun onItemClick(task: Task) {
-        // decrementa l'obiettivo del task fino a zero
+        // decrementa l'obiettivo del task fino a zero e a quel punto imposta completo=true
        if(task.obiettivo>0) {
             task.obiettivo -= 1
             if(task.obiettivo==0){
@@ -74,7 +75,7 @@ class FragmentTask() : Fragment() , TaskAdapter.ClickListener{
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        // inserisce una callback sugli item della recycler view
         val itemTouchHelperCallback = object : ItemTouchHelper.SimpleCallback(
             ItemTouchHelper.UP or ItemTouchHelper.DOWN,
             ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
@@ -84,16 +85,15 @@ class FragmentTask() : Fragment() , TaskAdapter.ClickListener{
                 viewHolder: RecyclerView.ViewHolder,
                 target: RecyclerView.ViewHolder
             ): Boolean {
-                return true
-                TODO("Not implemented")
+                return true // nessuna implementazione
             }
-
+            // implementazine dell'azione di swipe che elimina un task
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val pos = viewHolder.absoluteAdapterPosition
                 val task = adapter.task_list[pos]
 
                 viewModel.deleteTask(task)
-
+            // possibilità di UNDO dell'operazione di eliminazione
                 Snackbar.make(view, "Task deleted", Snackbar.LENGTH_LONG).apply {
                     setAction("UNDO"){
                         viewModel.insertTask(task)
