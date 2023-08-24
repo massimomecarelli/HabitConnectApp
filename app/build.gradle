@@ -16,6 +16,7 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
     }
 
     buildFeatures{
@@ -44,6 +45,7 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.9.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.coordinatorlayout:coordinatorlayout:1.2.0'
     testImplementation 'junit:junit:4.13.2'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.test:core-ktx:1.4.0'
@@ -70,6 +72,10 @@ dependencies {
     implementation "androidx.navigation:navigation-ui-ktx:2.4.1"
 
     implementation "androidx.work:work-runtime-ktx:2.8.1"
+ // dipendenza di terze parti per la progress bar circolare del timer
+    implementation 'me.zhanghai.android.materialprogressbar:library:1.6.1'
+// dipendenze per le shared preferences
+    implementation 'androidx.preference:preference:1.2.1'
 
 
 }

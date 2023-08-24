@@ -1,21 +1,28 @@
 package com.example.habitconnect
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import com.example.habitconnect.databinding.ActivityMainBinding
 import com.example.habitconnect.viewmodel.FragmentTaskViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
+
 class MainActivity : AppCompatActivity() {
 
+
     private lateinit var bottomNavigationView: BottomNavigationView
+    private lateinit var binding: ActivityMainBinding
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        bottomNavigationView = findViewById(R.id.bottom_navigation_view)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        bottomNavigationView = binding.bottomNavigationView
         //viene controllato se savedInstanceState è null cioè significa che è la prima volta che l'activity viene creata
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
@@ -34,17 +41,14 @@ class MainActivity : AppCompatActivity() {
         bottomNavigationView.setOnItemSelectedListener { item->
             when(item.itemId){
                 R.id.Tutorial ->{
-                    Toast.makeText(this,"tutorial", Toast.LENGTH_SHORT).show()
                     true
                 }
                 R.id.Focus ->{
-                    supportFragmentManager.beginTransaction()
-                        .replace(R.id.fragment_container, FragmentFocus())
-                        .commit()
+                    val timerActivityIntent = Intent(this, TimerActivity::class.java)
+                    startActivity(timerActivityIntent)
                     true
                 }
                 R.id.Tasks ->{
-                   // Toast.makeText(this,"tasks", Toast.LENGTH_SHORT).show()
                     // faccio la transaction per sostituire il fragment nel FrameLayout
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.fragment_container, FragmentTask())
@@ -55,7 +59,6 @@ class MainActivity : AppCompatActivity() {
                     for (i in viewModelTask.getNonCompleti()){
                         badgeTask.number +=1
                     }
-
                     true
                 }
                 R.id.Reminders ->{
@@ -65,7 +68,6 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 R.id.Community ->{
-                    Toast.makeText(this,"community", Toast.LENGTH_SHORT).show()
                     true
                 }
                 else-> {
@@ -73,5 +75,32 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    /* quando l'activity è nella fase di resume (era stato fatto un intent verso un'altra activity e
+    si è tornati indietro) ricarica la main activity in modo che ci si trovi nella sezione Tasks
+    con l'item Tasks nella bottom nav bar selezionato */
+    override fun onResume() {
+        super.onResume()
+        Log.d("MainActivity", "resumed")
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, FragmentTask())
+            .commit()
+        bottomNavigationView.setSelectedItemId(R.id.Tasks)
+    }
+
+    /* logs per debug */
+    override fun onStart() {
+        super.onStart()
+        Log.d("MainActivity", "started")
+    }
+    override fun onPause() {
+        super.onPause()
+        Log.d("MainActivity", "paused")
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        Log.d("MainActivity", "restarted")
     }
 }
