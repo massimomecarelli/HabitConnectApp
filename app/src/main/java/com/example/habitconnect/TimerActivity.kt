@@ -1,8 +1,14 @@
 package com.example.habitconnect
 
+import android.app.NotificationManager
+import android.content.Context
+import android.content.Intent
+import android.media.AudioManager
+import android.os.Build
 import android.os.Bundle
 import android.view.Menu
 import android.os.CountDownTimer
+import android.provider.Settings
 import android.util.Log
 import android.view.MenuItem
 import android.widget.Toast
@@ -13,6 +19,8 @@ import com.example.habitconnect.util.PrefUtil
 
 class TimerActivity : AppCompatActivity() {
     private lateinit var binding: ActivityTimerBinding
+    private lateinit var notificationManager: NotificationManager
+    private lateinit var audioManager: AudioManager
 
     // proprietà del timer
     private lateinit var timer: CountDownTimer
@@ -25,12 +33,14 @@ class TimerActivity : AppCompatActivity() {
         Stopped, Paused, Running
     }
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityTimerBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
+
+        notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        audioManager = getSystemService(Context.AUDIO_SERVICE) as AudioManager
 
         // inserisco l'icona e titolo del timer
         supportActionBar?.setIcon(R.drawable.ic_twotone_offline_bolt_24)
@@ -56,10 +66,7 @@ class TimerActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-
         initTimer()
-
-        //TODO: remove background timer, hide notification
     }
 
     override fun onPause() {
@@ -67,10 +74,8 @@ class TimerActivity : AppCompatActivity() {
 
         if (timerState == TimerState.Running){
             timer.cancel()
-            //TODO: start background timer and show notification
         }
         else if (timerState == TimerState.Paused){
-            //TODO: show notification
         }
 
         PrefUtil.setPreviousTimerLengthSeconds(timerLengthSeconds, this)
@@ -99,9 +104,7 @@ class TimerActivity : AppCompatActivity() {
         else
             timerLengthSeconds
 
-        //TODO: change secondsRemaining according to where the background timer stopped
-
-        //resume da dove si era interrotto
+        //riprende da dove si era interrotto
         if (timerState == TimerState.Running)
             startTimer()
 
@@ -168,17 +171,28 @@ class TimerActivity : AppCompatActivity() {
     // abilita/disabilita i fab con conseguente modifica automatica della UI
     private fun updateButtons(){
         when (timerState) {
-            TimerState.Running -> {
+            TimerState.Running -> { // viene settato il non disturbare  e la modalità silenziosa
+                audioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL)
+                audioManager.setRingerMode(AudioManager.RINGER_MODE_SILENT)
+                notificationManager.setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_ALARMS)
+                // solo gli alarms possono interrompere il filtro delle notifiche
+
                 binding.fabStart.isEnabled = false
                 binding.fabPause.isEnabled = true
                 binding.fabStop.isEnabled = true
             }
             TimerState.Stopped -> {
+                audioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL)
+                notificationManager.setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_ALL)
+                // tutte le notifiche di nuovo attive (nessun filtro)
                 binding.fabStart.isEnabled = true
                 binding.fabPause.isEnabled = false
                 binding.fabStop.isEnabled = false
             }
             TimerState.Paused -> {
+                audioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL)
+                notificationManager.setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_ALL)
+                // tutte le notifiche di nuovo attive (nessun filtro)
                 binding.fabStart.isEnabled = true
                 binding.fabPause.isEnabled = false
                 binding.fabStop.isEnabled = true
@@ -206,6 +220,13 @@ class TimerActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         Log.d("TimerActivity", "destroyed")
+        /* questo setTimerState viene chiamato per sicurezza, perchè un utente può uscire dal focus
+        mentre il timer è in stato Running, quindi viene sempre rimesso in stato paused
+         */
+        PrefUtil.setTimerState(TimerState.Paused, this)
+        // per sicurezza vengono rimesse tutte le suonerie e disattivato do not disturb
+        audioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL)
+        notificationManager.setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_ALL)
     }
 
     override fun onStop() {
@@ -221,5 +242,13 @@ class TimerActivity : AppCompatActivity() {
     override fun onRestart() {
         super.onRestart()
         Log.d("TimerActivity", "restarted")
+        /* l'utente quando è dentro focus, può andare nelle impostazioni e togliere la permission
+        per il do not disturb. Quindi al restart dell'activity viene rifatto il controllo
+         */
+        val notificationManager: NotificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        if (!notificationManager.isNotificationPolicyAccessGranted) {
+            Toast.makeText(this, "Allow Do Not Disturb Access!", Toast.LENGTH_LONG).show()
+            startActivity(Intent(this, MainActivity::class.java))
+        }
     }
 }
