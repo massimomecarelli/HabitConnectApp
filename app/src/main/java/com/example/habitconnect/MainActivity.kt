@@ -26,6 +26,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setSupportActionBar(binding.toolbar)
         bottomNavigationView = binding.bottomNavigationView
         //viene controllato se savedInstanceState è null cioè significa che è la prima volta che l'activity viene creata
         if (savedInstanceState == null) {
@@ -69,6 +70,7 @@ class MainActivity : AppCompatActivity() {
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.fragment_container, FragmentTask())
                         .commit()
+                    binding.toolbar.setSubtitle("")
 
                     // al click sul nome del menu faccio l'update del badge che indica i task non completati
                     badgeTask.number = 0
@@ -81,6 +83,7 @@ class MainActivity : AppCompatActivity() {
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.fragment_container, FragmentReminders())
                         .commit()
+                    binding.toolbar.setSubtitle("Reminders")
                     true
                 }
                 R.id.Community ->{
