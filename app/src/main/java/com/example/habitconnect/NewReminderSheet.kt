@@ -27,9 +27,9 @@ class NewReminderSheet : BottomSheetDialogFragment() {
         super.onViewCreated(view, savedInstanceState)
         val buttonDate: MaterialButton = view.findViewById(R.id.date)
         val buttonTime: MaterialButton = view.findViewById(R.id.time)
-        buttonDate.setOnClickListener(View.OnClickListener {
+        buttonDate.setOnClickListener{
             openDatePicker(view) // Open date picker dialog
-        })
+        }
 
         buttonTime.setOnClickListener {
             openTimePicker(view) //Open time picker dialog

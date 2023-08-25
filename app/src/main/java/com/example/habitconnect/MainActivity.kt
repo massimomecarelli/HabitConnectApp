@@ -87,6 +87,8 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 R.id.Community ->{
+                    val communityActivityIntent = Intent(this, SignInActivity::class.java)
+                    startActivity(communityActivityIntent)
                     true
                 }
                 else-> {

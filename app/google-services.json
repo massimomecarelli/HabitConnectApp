@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "421817940854",
+    "project_id": "habitconnect-e8fca",
+    "storage_bucket": "habitconnect-e8fca.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:421817940854:android:6ba60a9518ea3bbe69d857",
+        "android_client_info": {
+          "package_name": "com.example.habitconnect"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "421817940854-ndkeh648n1m0nucr48j3hdb7ojgp9qns.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC04zfDjFNzDAIYmi1XELwNu5p4v5aY1N4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "421817940854-ndkeh648n1m0nucr48j3hdb7ojgp9qns.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
