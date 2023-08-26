@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="8dp"
+    app:cardMaxElevation="10dp"
+    app:cardPreventCornerOverlap="true"
+    app:cardUseCompatPadding="true"
+    android:backgroundTint="?attr/colorOnPrimary">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/user"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="10dp"
+            android:text="User"
+            app:drawableStartCompat="@drawable/ic_user"
+            android:textColor="?attr/colorPrimary"
+            android:drawablePadding="4dp"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/timestamp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/user"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="10dp"
+            android:alpha="0.6"
+            android:layout_marginStart="10dp"
+            android:backgroundTint="@color/yellow"
+            android:drawablePadding="4dp"
+            android:text="timestamp"
+            android:gravity="center_vertical"
+            android:textAllCaps="true"
+            android:textSize="12sp"
+            android:textStyle="italic"
+            app:drawableStartCompat="@drawable/ic_timestamp" />
+
+        <TextView
+            android:id="@+id/testo_commento"
+            android:layout_width="366dp"
+            android:layout_height="41dp"
+            android:layout_below="@id/timestamp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:fitsSystemWindows="true"
+            android:text="Testo"
+            android:gravity="center_vertical"
+            android:textColor="?attr/colorOnPrimaryFixedVariant" />
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>
