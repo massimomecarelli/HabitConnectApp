@@ -93,7 +93,6 @@ class FragmentReminders: Fragment(), ReminderAdapter.ClickListener {
                 target: RecyclerView.ViewHolder
             ): Boolean {
                 return true
-                TODO("Not implemented")
             }
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {

@@ -84,7 +84,7 @@ class NewReminderSheet : BottomSheetDialogFragment() {
             "Reminder",
             DateFormat.getDateInstance().toString(),
             DateFormat.getTimeInstance().toString()
-        )
+        ) // reminder con testo di default
 
         val testo = view.findViewById<TextInputEditText>(R.id.testo).text.toString()
         if (!testo.isNullOrEmpty()) {

@@ -4,6 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".TimerActivity">
     <item
+        android:id="@+id/refresh"
+        android:orderInCategory="100"
+        android:name="RefreshPage"
+        app:showAsAction="ifRoom"
+        android:title="REFRESH PAGE"
+        android:icon="@drawable/ic_refresh"/>
+    <item
         android:id="@+id/SignOut"
         android:orderInCategory="100"
         android:name="SignOut"
