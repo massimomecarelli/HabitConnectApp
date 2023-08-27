@@ -2,7 +2,7 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="200dp"
+    android:layout_height="250dp"
     android:layout_margin="5dp"
     app:cardBackgroundColor="@color/white"
     app:cardCornerRadius="8dp"
@@ -28,6 +28,7 @@
             android:textColor="?attr/colorPrimary"
             android:drawablePadding="4dp"
             android:textSize="18sp"
+            android:fitsSystemWindows="true"
             android:textStyle="bold" />
 
         <TextView
@@ -61,9 +62,10 @@
             android:fitsSystemWindows="true"
             android:gravity="start"
             android:text="Testo"
-            android:scrollbars="vertical"
-            android:scrollbarFadeDuration="@integer/material_motion_duration_long_1"
-            android:fadeScrollbars="true"
+            android:autoSizeTextType="uniform"
+            app:autoSizeMinTextSize="9sp"
+            android:autoSizeMaxTextSize="16sp"
+            app:autoSizeStepGranularity="2sp"
             android:textColor="?attr/colorOnPrimaryFixedVariant" />
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

@@ -51,7 +51,7 @@ class FragmentReminders: Fragment(), ReminderAdapter.ClickListener {
         viewModel.reminders.observe(this, Observer<List<Reminder>>() { remindersList ->
             adapter = ReminderAdapter(remindersList, this)
             recyclerView.adapter = adapter
-            adapter.setTasks(remindersList)
+            adapter.setReminders(remindersList)
         })
 
 

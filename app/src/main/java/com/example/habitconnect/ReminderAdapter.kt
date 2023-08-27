@@ -44,8 +44,8 @@ class ReminderAdapter(private val reminderList: List<Reminder>, val clickListene
 
     override fun getItemCount() = reminderList.size
 
-    fun setTasks(tasks: List<Reminder>) {
-        this.reminder_list = tasks
+    fun setReminders(reminders: List<Reminder>) {
+        this.reminder_list = reminders
         notifyDataSetChanged()
     }
 

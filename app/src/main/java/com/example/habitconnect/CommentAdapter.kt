@@ -7,10 +7,14 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.habitconnect.data.Comment
+import com.example.habitconnect.db.model.Reminder
+import com.google.firebase.Timestamp
+import java.text.DateFormat
+import java.util.*
 
 
 // adapter per i singoli commenti nella recyclerview della community
-class CommentAdapter(private val comments: List<Comment>) : RecyclerView.Adapter<CommentAdapter.CommentViewHolder>() {
+class CommentAdapter(private val comments: MutableList<Comment>) : RecyclerView.Adapter<CommentAdapter.CommentViewHolder>() {
 
     // assegnamento dei valori del singolo item al layout di row di cui ho fatto l'inflate
     class CommentViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -32,7 +36,15 @@ class CommentAdapter(private val comments: List<Comment>) : RecyclerView.Adapter
         val comment = comments[position]
         holder.user.text = comment.user
         holder.comment.text = comment.testo
+        val dateFormat: Date? = comment.timestamp?.toDate() // converte timestamp in Date
+        holder.timestamp.text = dateFormat.toString() // converte in stringa per inserirla nella TextView
     }
 
     override fun getItemCount() = comments.size
+
+    // notifica il cambiamento LiveData, attivato con observe nella CommunityActivity
+    fun setComments() {
+        notifyDataSetChanged()
+    }
+
 }

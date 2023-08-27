@@ -1,17 +1,33 @@
 package com.example.habitconnect
 
+import android.content.ContentValues
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isInvisible
+import androidx.core.view.isVisible
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.habitconnect.data.Comment
 import com.example.habitconnect.databinding.ActivityCommunityBinding
+import com.example.habitconnect.db.model.Reminder
 import com.example.habitconnect.util.PrefUtil
 import com.example.habitconnect.viewmodel.ActivityCommunityViewModel
 import com.example.habitconnect.viewmodel.FragmentRemindersViewModel
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+
 
 class CommunityActivity : AppCompatActivity() {
     private lateinit var binding : ActivityCommunityBinding
@@ -29,25 +45,40 @@ class CommunityActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true) // ritorno all'activity parent (main)
         firebaseAuth = FirebaseAuth.getInstance()
 
-        recyclerView = binding.recycleComments
-
         viewModel = ViewModelProvider(
             this,
             ViewModelProvider.AndroidViewModelFactory.getInstance(application)
         )[ActivityCommunityViewModel::class.java]
 
-        viewModel.getAllComments()
-        val commentList = viewModel.listaCommenti
+        recyclerView = binding.recycleComments
+        recyclerView.layoutManager = LinearLayoutManager(this)
 
-        // assegna il CommentAdapter come adapter della recyclerView per popolarla
-        adapter = CommentAdapter(commentList)
-        recyclerView.adapter = adapter
+        getResponseUsingLiveData() // scarica tutti i commenti e li salva su una mutable list
+            // gestito con un observer che quando riceve risposta al completamento del download
+            // setta l'adapter, lo assegna alla recyclerview e notifica il cambiamento
+
 
         // apre la bottom sheet dialog per inserire un nuovo commento
         binding.floatingActionButton.setOnClickListener {
             NewCommentSheet().show(
                 supportFragmentManager, "DialogAddReminder"
             )
+        }
+    }
+
+    /*
+    * Richiede tutti i commenti gestendo la lista di risposta come live data, agganciando un observer
+    * alla funzione di get del viewmodel, questa ha un listener al completamento del fetch dei dati
+    * (ASINCRONO) che ritorna la Response dal server
+    * */
+    private fun getResponseUsingLiveData() {
+        binding.progressbar.visibility = View.VISIBLE
+        viewModel.getResponseAllComments().observe(this) {
+            adapter = CommentAdapter(viewModel.listaCommenti)
+            // assegna il CommentAdapter come adapter della recyclerView per popolarla
+            recyclerView.adapter = adapter
+            adapter.setComments()
+            binding.progressbar.visibility = View.INVISIBLE
         }
     }
 
