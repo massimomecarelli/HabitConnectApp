@@ -47,6 +47,11 @@
             android:name=".CommunityActivity"
             android:exported="false"
             android:parentActivityName=".MainActivity"/>
+        <activity
+            android:name=".TutorialActivity"
+            android:exported="true"
+            android:parentActivityName=".MainActivity">
+        </activity>
     </application>
 
 </manifest>

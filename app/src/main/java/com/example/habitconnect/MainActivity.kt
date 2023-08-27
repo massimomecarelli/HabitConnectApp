@@ -46,6 +46,7 @@ class MainActivity : AppCompatActivity() {
         bottomNavigationView.setOnItemSelectedListener { item->
             when(item.itemId){
                 R.id.Tutorial ->{
+                    startActivity(Intent(this, TutorialActivity::class.java))
                     true
                 }
                 R.id.Focus ->{
@@ -60,8 +61,7 @@ class MainActivity : AppCompatActivity() {
                         // nell'intent metto come destinazione un'app esterna (Settings)
                         startActivity(Intent(Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS))
                     } else{
-                        val timerActivityIntent = Intent(this, TimerActivity::class.java)
-                        startActivity(timerActivityIntent)
+                        startActivity(Intent(this, TimerActivity::class.java))
                     }
                     true
                 }
@@ -87,8 +87,7 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 R.id.Community ->{
-                    val communityActivityIntent = Intent(this, SignInActivity::class.java)
-                    startActivity(communityActivityIntent)
+                    startActivity(Intent(this, SignInActivity::class.java))
                     true
                 }
                 else-> {
