@@ -6,6 +6,7 @@
         <item name="colorPrimaryVariant">@color/black</item>
         <item name="colorOnPrimaryFixedVariant">@color/black</item>
         <item name="colorOnPrimary">@color/material_90</item>
+        <item name="colorOnPrimaryFixed">@color/radical_red</item>
         <!-- Secondary brand color. -->
         <!-- utilizzati nei fab -->
         <item name="colorSecondary">@color/radical_red</item>
