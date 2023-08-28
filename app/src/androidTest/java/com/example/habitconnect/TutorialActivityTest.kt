@@ -32,4 +32,32 @@ class TutorialActivityTest {
             .check(matches(ViewMatchers.withEffectiveVisibility(ViewMatchers.Visibility.INVISIBLE)))
     }
 
+    /*
+    12 click su next: verifica che next sia invisibile,
+    poi clicca su prev e verifica che next sia visibile
+     */
+    @Test
+    fun isNextButtonHidden() {
+        Thread.sleep(500)
+        Espresso.onView(withId(R.id.next_button))
+            .perform(ViewActions.click())
+            .perform(ViewActions.click())
+            .perform(ViewActions.click())
+            .perform(ViewActions.click())
+            .perform(ViewActions.click())
+            .perform(ViewActions.click())
+            .perform(ViewActions.click())
+            .perform(ViewActions.click())
+            .perform(ViewActions.click())
+            .perform(ViewActions.click())
+            .perform(ViewActions.click())
+            .perform(ViewActions.click()) // 12 click
+        Espresso.onView(withId(R.id.next_button))
+            .check(matches(ViewMatchers.withEffectiveVisibility(ViewMatchers.Visibility.INVISIBLE)))
+        Thread.sleep(500)
+        Espresso.onView(withId(R.id.prev_button)).perform(ViewActions.click())
+        Espresso.onView(withId(R.id.next_button))
+            .check(matches(ViewMatchers.withEffectiveVisibility(ViewMatchers.Visibility.VISIBLE)))
+    }
+
 }
