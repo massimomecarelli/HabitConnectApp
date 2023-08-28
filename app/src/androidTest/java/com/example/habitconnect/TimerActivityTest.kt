@@ -9,7 +9,6 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import java.util.Timer
 
 @RunWith(AndroidJUnit4::class)
 class TimerActivityTest {
@@ -30,7 +29,8 @@ class TimerActivityTest {
             .check(ViewAssertions.matches(ViewMatchers.isNotEnabled()))
     }
 
-    @Test // test dello stop e restart del timer per vedere se i bottoni si abilitano e disabilitano correttamente
+    // test dello stop e restart del timer per vedere se i bottoni si abilitano e disabilitano correttamente
+    @Test
     fun isTimerRestarted() {
         Thread.sleep(1000)
         Espresso.onView(ViewMatchers.withId(R.id.fab_stop)).perform(ViewActions.click())

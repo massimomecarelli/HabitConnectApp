@@ -25,6 +25,6 @@ class MainActivityTest {
         ActivityScenario.launch(MainActivity::class.java)
         Espresso.onView(withId(R.id.main_layout))
             .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
-        Thread.sleep(1000)
+        Thread.sleep(500)
     }
 }
