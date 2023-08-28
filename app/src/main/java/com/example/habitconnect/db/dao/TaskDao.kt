@@ -3,6 +3,7 @@ package com.example.habitconnect.db.dao
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.room.*
+import com.example.habitconnect.db.model.Reminder
 import com.example.habitconnect.db.model.Task
 
 @Dao
@@ -12,6 +13,9 @@ interface TaskDao {
 
     @Query("select * from task where Id=:Id")
     fun getTaskById(Id: Int): Task
+
+    @Query("select * from task where nome=:nome")
+    fun getTaskByNome(nome: String): MutableList<Task>
 
     @Query("select * from task where completo=false")
     fun getNonCompleti(): List<Task>
@@ -23,4 +27,6 @@ interface TaskDao {
     fun update(task: Task)
     @Delete
     suspend fun delete(task: Task)
+    @Query("delete from task where Id = :Id")
+    fun deletebyId(Id: Int)
 }
