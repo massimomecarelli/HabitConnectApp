@@ -21,15 +21,11 @@ class FragmentTaskViewModel (application: Application) : AndroidViewModel(applic
      }
 
      fun getAllTasks(){
-        // val taskDao = AppDatabase.getInstance(getApplication()).taskDao()
-     //    val list = taskDao.getAllTasks()
          taskDao.getAllTasks()
          tasks // inizializza tasks
-      //   tasks.postValue(list)
      }
 
      fun insertTask(entity: Task){
-        // val taskDao = AppDatabase.getInstance(getApplication()).taskDao()
          taskDao.insert(entity)
          getAllTasks()
      }
@@ -40,7 +36,6 @@ class FragmentTaskViewModel (application: Application) : AndroidViewModel(applic
      }
 
     fun updateTask(entity: Task){
-        // val taskDao = AppDatabase.getInstance(getApplication()).taskDao()
         taskDao.update(entity)
         getAllTasks()
     }
